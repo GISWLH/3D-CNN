@@ -10,22 +10,22 @@ class CNN3D(nn.Module):
         # First layer: extracting spatial and temporal features
         self.conv1 = nn.Conv3d(
             in_channels=input_features,
-            out_channels=16,
+            out_channels=12,
             kernel_size=(3, 3, 3),
             padding=(1, 1, 1)
         )
         
         # Second layer: further extract deep features
         self.conv2 = nn.Conv3d(
-            in_channels=16,
-            out_channels=32,
+            in_channels=12,
+            out_channels=24,
             kernel_size=(3, 3, 3),
             padding=(1, 1, 1)
         )
         
         # Third layer: reduce the time step from 16 to 3, and the feature dimension is 1
         self.conv3 = nn.Conv3d(
-            in_channels=32,
+            in_channels=24,
             out_channels=output_features,
             kernel_size=(3, 1, 1),
             stride=(5, 1, 1),
@@ -34,7 +34,7 @@ class CNN3D(nn.Module):
 
         # Activation Function and Dropout
         self.tanh = nn.Tanh()
-        self.dropout = nn.Dropout3d(p=0.3)
+        self.dropout = nn.Dropout3d(p=0.1)
 
     def forward(self, x):
         # Input: (batch, feature, time, height, width)
@@ -79,9 +79,9 @@ class WeatherDataset1(Dataset):
         target_surface = self.input[idx + 16: idx + 16 + 3, 0, :, :]
         return upper_input, target_surface
     
-DEVICE = torch.device("cuda")
+DEVICE = torch.device("cuda:0")
 model = CNN3D(input_features=8, output_features=1, target_time_steps=16)
-model = nn.DataParallel(model)
+
 model.to(DEVICE)
 optimizer = torch.optim.Adam(model.parameters(), lr=0.0005)
 
