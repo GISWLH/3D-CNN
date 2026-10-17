@@ -1,3 +1,7 @@
+<!-- readme-visual-refresh:banner -->
+![3D-CNN — hand-drawn project banner](assets/readme/banner.svg)
+<!-- /readme-visual-refresh:banner -->
+
 # 3D-CNN
 A implementation of "Deep learning for multi-year ENSO forecasts"
 
@@ -93,3 +97,7 @@ plot.one_map_flat(sst_dataarray, ax, levels=levels, cmap="RdBu_r", mask_ocean=Fa
 ```
 
 ![image-20250127144144425](https://imagecollection.oss-cn-beijing.aliyuncs.com/legion/image-20250127144144425.png)
+
+<!-- readme-visual-refresh:artwork-source -->
+[Editable banner artwork · Excalidraw](assets/readme/banner.excalidraw)
+<!-- /readme-visual-refresh:artwork-source -->
